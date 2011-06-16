@@ -1,0 +1,100 @@
+#:kivy 1.0
+
+<TouchLiveConnect>:
+    AnchorLayout:
+        BoxLayout:
+            size_hint: None, None
+            size: 300, self.minimum_size[1]
+            spacing: 10
+            orientation: 'vertical'
+
+            Label:
+                text: 'TouchLive !'
+                size_hint_y: None
+                font_size: 24
+                height: 80
+
+            BoxLayout:
+                spacing: 10
+                Button:
+                    text: 'Connect'
+                    size_hint_y: None
+                    height: 50
+                    on_release: root.app.do_connect()
+                Button:
+                    text: 'Configure'
+                    size_hint_y: None
+                    height: 50
+                    on_release: root.app.open_settings()
+
+<GridLayout>:
+    canvas:
+        Color:
+            rgba: (1, 0, 0, .2)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TouchLiveSlider>:
+    canvas:
+        Clear
+        Color:
+            rgb: (1, 1, 1)
+        BorderImage:
+            border: (16, 16, 16, 16)
+            pos: self.pos
+            size: self.size
+            source: 'data/images/button.png'
+        BorderImage:
+            border: (16 * self.value_normalized, 16 * self.value_normalized, 16 * self.value_normalized, 16 * self.value_normalized)
+            pos: self.pos
+            size: self.width * (self.value_normalized if self.orientation == 'horizontal' else 1), self.height * (self.value_normalized if self.orientation == 'vertical' else 1)
+            source: 'data/images/button_pressed.png'
+
+<TouchLiveButton>:
+    canvas.after:
+        Color:
+            rgba: (1, 1, 1, self.highlight)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TouchLiveMain>:
+    grid: grid
+    grid_right: grid_right
+    grid_bottom: grid_bottom
+    grid_xy: grid_xy
+
+    GridLayout:
+        spacing: 10
+        padding: 10
+        cols: 2
+        rows: 2
+
+        GridLayout:
+            id: grid
+            cols: 8
+            rows: 8
+            spacing: 10
+            size_hint_y: 0.5 * root.width / float(root.height)
+
+        GridLayout:
+            id: grid_right
+            cols: 2
+            rows: 8
+            spacing: 10
+            size_hint_y: 0.5 * root.width / float(root.height)
+
+        GridLayout:
+            id: grid_bottom
+            cols: 8
+            rows: 1
+            spacing: 10
+            size_hint_y: 1 - grid.size_hint_y
+
+        GridLayout:
+            id: grid_xy
+            cols: 2
+            rows: 1
+            spacing: 10
+            size_hint_y: 1 - grid.size_hint_y
