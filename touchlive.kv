@@ -35,21 +35,22 @@
             pos: self.pos
             size: self.size
 
-<TouchLiveSlider>:
+<-TouchLiveSlider>:
     canvas:
-        Clear
         Color:
-            rgb: (1, 1, 1)
-        BorderImage:
-            border: (16, 16, 16, 16)
+            rgb: (.21, .21, .21)
+        Rectangle:
+            #border: (16, 16, 16, 16)
             pos: self.pos
             size: self.size
-            source: 'data/images/button.png'
-        BorderImage:
-            border: (16 * self.value_normalized, 16 * self.value_normalized, 16 * self.value_normalized, 16 * self.value_normalized)
+            #source: 'data/images/button.png'
+        Color:
+            rgb: (.3, .1, 1)           
+        Rectangle:
+            #border: (16 * self.value_normalized, 16 * self.value_normalized, 16 * self.value_normalized, 16 * self.value_normalized)
             pos: self.pos
             size: self.width * (self.value_normalized if self.orientation == 'horizontal' else 1), self.height * (self.value_normalized if self.orientation == 'vertical' else 1)
-            source: 'data/images/button_pressed.png'
+            #source: 'data/images/button_pressed.png'
 
 <TouchLiveButton>:
     canvas.after:
